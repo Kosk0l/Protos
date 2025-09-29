@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "kosk0l.sso.v1;ssov1";
+
+service Auth {
+    rpc Register (RegisterRepuest) returns (RegisterResponse); // Ручка приема и ответа
+    rpc Login (LoginRepuest) returns (LoginResponse);
+}
+
+message RegisterRepuest {
+    string email = 1;       // Email пользователя to register 
+    string password = 2;    // Пароль пользователя to register
+}
+
+message RegisterResponse {
+    int64 userID = 1;       // ID пользователя для регистрации
+}
+
+message LoginRepuest {
+    string email = 1;       // Email пользователя to register
+    string password = 2;    // Пароль пользователя to register
+    int32 AppID = 3;        // ID приложения, в которое пользователь логинится
+}
+
+message LoginResponse {
+    string token = 1;       // Auth token залогиненного пользователя
+}
+
+// protoc -I proto proto/sso/sso.proto --go_out=./gen/go/sso --go_opt=paths=source_relative --go-grpc_out=./gen/go/sso --go-grpc_opt=paths=source_relative
