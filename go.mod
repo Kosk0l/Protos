@@ -1,3 +1,3 @@
-module github.com/Kosk0l/Protos
+module protos
 
 go 1.24.2
